@@ -1,12 +1,5 @@
 package net.javaguides.controller;
 
-import net.javaguides.service.KeywordServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,6 +29,8 @@ public class MemberController {
 
     Logger logger = LogManager.getLogger(MemberController.class);
 
+    Member member;
+
     private MemberService memberService;
 //    @Autowired
 //    KeywordServiceImpl keywordService;
@@ -49,38 +44,53 @@ public class MemberController {
         return memberService.createMember(member);
     }
 
+    @PostMapping("/updatemember")
+    public List<Map<String, Object>> UpdateMember(@RequestBody Member member) {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        Map<String, Object> resultMap = new HashMap<>();
+
+        String email = member.getEmail();
+        String password = member.getPassword();
+
+        if (password.length() > 5 && !password.isBlank()) {
+
+            memberService.UpdateMember(email, password);
+            resultMap.put("Message", "修改成功");
+            resultList.add(resultMap);
+        } else {
+            resultMap.put("Message", "修改失敗");
+            resultList.add(resultMap);
+        }
+        return resultList;
+    }
+
     @PostMapping("/Login")
     @CrossOrigin("*")
-    public List<Map<String, Object>> Login( @RequestBody Member member) {
+    public List<Map<String, Object>> Login(@RequestBody Member member) {
+
 
         String memberName = member.getMemberName();
         String password = member.getPassword();
         List<Member> login = memberService.Login(memberName, password);
-
-//        HttpSession session =request.getSession();
-
         List<Map<String, Object>> resultList = new ArrayList<>();
-        for (Member memberItem : login) {
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("Message", "登录成功");
-            resultMap.put("Status", "Y");
-            resultMap.put("member", memberItem);
-            resultList.add(resultMap);
-        }
 
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            String jsonResult = mapper.writeValueAsString(resultList);
 
-//            session.setAttribute("username",memberName);
-
-            System.out.println(jsonResult);
+            for (Member memberItem : login) {
+                Map<String, Object> resultMap = new HashMap<>();
+                resultMap.put("Message", "登录成功");
+                resultMap.put("Status", "Y");
+                resultMap.put("member", memberItem);
+                resultList.add(resultMap);
+            }
+//            ObjectMapper mapper = new ObjectMapper();
+//            String jsonResult = mapper.writeValueAsString(resultList);
+//            System.out.println(jsonResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultList;
     }
-
 
 
 }

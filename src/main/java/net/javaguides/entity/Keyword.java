@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @Entity

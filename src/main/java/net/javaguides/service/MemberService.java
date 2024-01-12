@@ -8,5 +8,7 @@ public interface MemberService {
 
     Member createMember(Member member);
 
+    void UpdateMember(String email,String password);
+
     List<Member> Login(String memberName, String password);
 }

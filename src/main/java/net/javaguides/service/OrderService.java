@@ -1,5 +1,6 @@
 package net.javaguides.service;
 
+import net.javaguides.entity.Card;
 import net.javaguides.entity.Order;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface OrderService {
     List<Order> findByMemberId(Long memberId);
 
     List<Order> findpayId(Long payId);
+//    Card findcard(Long orderId);
 }

@@ -39,7 +39,4 @@ public class Member {
     @Column(name = "ADDRESS")
     private String address;
 
-    @OneToMany
-    @JoinColumn(name = "MEMBER_ID")
-    private Order order;
 }

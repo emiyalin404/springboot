@@ -1,5 +1,6 @@
 package net.javaguides.service;
 
+import net.javaguides.entity.Card;
 import net.javaguides.entity.Order;
 import net.javaguides.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,9 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findpayId(Long payId) {
         return orderRepository.findpayId(payId);
     }
+
+//    @Override
+//    public Card findcard(Long orderId) {
+//        return orderRepository.findcard(orderId);
+//    }
 }

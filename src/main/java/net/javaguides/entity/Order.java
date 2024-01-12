@@ -35,7 +35,7 @@ public class Order {
     @Column(name = "LUMP_SUM")
     private String lumpSum;
     @Column(name = "PAY_ID")
-    private String payId;
+    private Long payId;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID",referencedColumnName = "MEMBER_ID", insertable = false, updatable = false)

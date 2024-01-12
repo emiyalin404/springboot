@@ -17,8 +17,9 @@ public class MealCategories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEAL_CATEGORIES_ID")
     private Long mealCategoriesId;
-    @Column(name = "MEALCATEGORIESNAME")
+    @Column(name = "MEAL_CATEGORIES_NAME")
     private String mealCategoriesName;
     @Column(name = "CAPTION")
     private String caption;
+
 }
