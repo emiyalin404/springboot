@@ -2,7 +2,9 @@ package net.javaguides.entity;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,5 +41,7 @@ public class Employee {
     @Column(name = "PHONE")
     private String phone;
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+    private List<Order> orders;
 
 }

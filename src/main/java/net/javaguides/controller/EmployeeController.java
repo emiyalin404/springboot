@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/VueTestApi/api")
+@RequestMapping("/VueTestApi/api/VueTest")
 
 public class EmployeeController {
     private EmployeeService employeeService;
@@ -30,10 +30,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/deleteEmployee")
-    public Map<String, Object> deleteemployee(@RequestParam String employeeName){
+    public Map<String, Object> deleteemployee(@RequestParam Long employeeId){
         Map<String, Object> resultMap = new HashMap<>();
-        if (!employeeName.isBlank()) {
-            employeeService.deleteemployee(employeeName);
+        if (employeeId!=null) {
+            employeeService.deleteemployee(employeeId);
             resultMap.put("Message", "刪除成功");
         } else {
             resultMap.put("Message", "刪除失敗");

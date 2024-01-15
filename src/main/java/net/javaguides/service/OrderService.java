@@ -11,5 +11,5 @@ public interface OrderService {
     List<Order> findByMemberId(Long memberId);
 
     List<Order> findpayId(Long payId);
-//    Card findcard(Long orderId);
+
 }

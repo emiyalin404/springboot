@@ -20,10 +20,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             " WHERE p.payId = :payId")
     List<Order>findpayId(@Param("payId") Long payId);
 
-//    @Query("SELECT o FROM Order o " +
-//            "JOIN o.member m " +
-//            "JOIN m.card c " +
-//            "WHERE o.orderId = :orderId")
-//    Card findcard(@Param("orderId")Long orderId);
-
 }

@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Modifying
-    @Query("DELETE FROM Employee e WHERE e.employeeName = :employeeName")
-    void deleteemployee(@Param("employeeName")String employeeName);
+    @Query("DELETE FROM Employee e WHERE e.employeeId = :employeeId")
+    void deleteemployee(@Param("employeeId")Long employeeId);
 }

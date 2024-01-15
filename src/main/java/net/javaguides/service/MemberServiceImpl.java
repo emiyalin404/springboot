@@ -36,6 +36,10 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.Login(memberName, password);
     }
 
+    @Override
+    public void Save(Member member) {
+        memberRepository.save(member);
+    }
 
 
 }

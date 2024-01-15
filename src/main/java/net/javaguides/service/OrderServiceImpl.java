@@ -34,8 +34,4 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findpayId(payId);
     }
 
-//    @Override
-//    public Card findcard(Long orderId) {
-//        return orderRepository.findcard(orderId);
-//    }
 }

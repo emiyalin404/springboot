@@ -3,6 +3,7 @@ package net.javaguides.entity;
 import java.time.LocalDateTime;
 
 // import javax.persistence.CascadeType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 // import javax.persistence.FetchType;
@@ -41,7 +42,7 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID",referencedColumnName = "MEMBER_ID", insertable = false, updatable = false)
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID",referencedColumnName = "EMPLOYEE_ID", insertable = false, updatable = false)
     private Employee employee;
 

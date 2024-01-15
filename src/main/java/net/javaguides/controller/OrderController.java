@@ -44,16 +44,4 @@ public class OrderController {
         return  new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-//    @GetMapping("/findcard")
-//    public Map<String,Object> findcard(@RequestParam("orderId") Long orderId) {
-//        Map<String, Object> resultMap = new HashMap<>();
-//        if(orderId!=null) {
-//            Card card = orderService.findcard(orderId);
-//            resultMap.put("card", card);
-//            resultMap.put("Message", "查詢成功");
-//        } else {
-//            resultMap.put("Message", "查詢失敗");
-//        }
-//        return resultMap;
-//    }
 }

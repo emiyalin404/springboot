@@ -38,5 +38,7 @@ public class Member {
     private String password;
     @Column(name = "ADDRESS")
     private String address;
+    @Column(name = "ACCESS_TOKEN")
+    private String accessToken;
 
 }

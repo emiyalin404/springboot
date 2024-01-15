@@ -11,4 +11,6 @@ public interface MemberService {
     void UpdateMember(String email,String password);
 
     List<Member> Login(String memberName, String password);
+
+    void Save(Member member);
 }
