@@ -54,9 +54,11 @@ public class JwtService {
         return Jwts
                 .builder()
                 .setClaims(extractClaims)
-                .setSubject(member.getMemberName()) //以Username做為Subject
+                .setHeaderParam("typ","JWT")
+                .setSubject("測試測試123") //以Username做為Subject
+                .claim("name",member.getMemberName())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+//                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

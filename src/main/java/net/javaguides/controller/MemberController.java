@@ -1,10 +1,13 @@
 package net.javaguides.controller;
 
 import io.jsonwebtoken.Jwts;
+import io.swagger.annotations.ApiOperation;
 import net.javaguides.service.JwtService;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -58,6 +62,7 @@ public class MemberController {
     }
 
     @PostMapping("/updatemember")
+    @ApiOperation(value = "Login API", response = ResponseEntity.class)
     public List<Map<String, Object>> UpdateMember(@RequestBody Member member) {
         List<Map<String, Object>> resultList = new ArrayList<>();
         Map<String, Object> resultMap = new HashMap<>();
@@ -79,44 +84,37 @@ public class MemberController {
 
     @PostMapping("/Login")
     @CrossOrigin("*")
-    public ResponseEntity<List<Map<String, Object>>> Login(@RequestBody Member member) {
+    @ApiOperation(value = "Login API", response = ResponseEntity.class)
+    public ResponseEntity<List<Map<String, Object>>> Login(HttpServletRequest request, @RequestBody Member member) {
 
         String memberName = member.getMemberName();
         String password = member.getPassword();
         List<Member> login = memberService.Login(memberName, password);
-
-//        List<Map<String, Object>> resultList = new ArrayList<>();
-
-//        token:
+//        HttpSession session = request.getSession();
+        //token:
         try {
             Member logginMember = login.get(0);
             String newAccessToken = jwtService.generateToken(logginMember);
+            //BCrypt:
+            //String sessionPassword = generateAccessToken(logginMember);
             logginMember.setAccessToken(newAccessToken);
+
             memberService.Save(logginMember);
 
-            Map<String,Object> resultMap=new HashMap<>();
-                resultMap.put("Message", "登录成功");
-                resultMap.put("Status", "Y");
-                resultMap.put("memeber",logginMember);
-                resultMap.put("accessToken",newAccessToken);
-                return ResponseEntity.ok(Collections.singletonList(resultMap));
-//            BCrypt:
-//            Member logginMember = login.get(0);
-//            String newAccessToken = generateAccessToken(logginMember);
-//            logginMember.setAccessToken(newAccessToken);
-//            memberService.Save(logginMember);
-//            for (Member memberItem : login) {
-//                Map<String, Object> resultMap = new HashMap<>();
-//                resultMap.put("Message", "登录成功");
-//                resultMap.put("Status", "Y");
-//                resultMap.put("member", memberItem);
-//                resultList.add(resultMap);
-//            }
+            logger.info("[logincontroller 登入成功]");
+
+//            session.setAttribute("user", sessionPassword);
+
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("Message", "登入成功");
+            resultMap.put("Status", "Y");
+            resultMap.put("member", logginMember);
+            resultMap.put("accessToken", newAccessToken);
+            return ResponseEntity.ok(Collections.singletonList(resultMap));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-//        return resultList;
     }
 
     private String generateAccessToken(Member logginMember) {
