@@ -1,4 +1,4 @@
-package net.javaguides.common;
+package net.javaguides.enumeration;
 
 public enum MessageEnum {
     SUCCESS("success"),
