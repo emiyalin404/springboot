@@ -1,6 +1,6 @@
 package net.javaguides.Dynamic;
 
-import net.javaguides.enumeration.ExportType;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
@@ -22,7 +22,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
-import static net.javaguides.enumeration.ExportType.PDF;
+import static net.javaguides.Dynamic.ExportType.PDF;
+
 
 public class Report {
     public static final String ATTACHMENT_FILENAME = "attachment;filename=";

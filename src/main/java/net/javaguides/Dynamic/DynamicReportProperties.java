@@ -26,4 +26,12 @@ public class DynamicReportProperties {
     public List<String> getSummary(){
         return summary;
     }
+
+    public List<String> getColumnHeaders() {
+        return columHeaders;
+    }
+
+    public List<List<String>> getRows() {
+        return rows;
+    }
 }
