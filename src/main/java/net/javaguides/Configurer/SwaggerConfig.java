@@ -61,12 +61,13 @@ public class SwaggerConfig {
     @Bean
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("net.javaguides.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
+        .pathMapping("/")
+        .useDefaultResponseMessages(false)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("net.javaguides.controller"))
+        .paths(PathSelectors.any())
+        .build()
+        .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {

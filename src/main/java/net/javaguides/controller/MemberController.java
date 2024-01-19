@@ -93,24 +93,29 @@ public class MemberController {
 //        HttpSession session = request.getSession();
         //token:
         try {
-            Member logginMember = login.get(0);
-            String newAccessToken = jwtService.generateToken(logginMember);
-            //BCrypt:
-            //String sessionPassword = generateAccessToken(logginMember);
-            logginMember.setAccessToken(newAccessToken);
-
-            memberService.Save(logginMember);
-
-            logger.info("[logincontroller 登入成功]");
-
-//            session.setAttribute("user", sessionPassword);
-
-            Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("Message", "登入成功");
-            resultMap.put("Status", "Y");
-            resultMap.put("member", logginMember);
-            resultMap.put("accessToken", newAccessToken);
-            return ResponseEntity.ok(Collections.singletonList(resultMap));
+            if (login != null && !login.isEmpty()) {
+                // 如果有匹配的成员
+                Member logginMember = login.get(0);
+                String newAccessToken = jwtService.generateToken(logginMember);
+        
+                logginMember.setAccessToken(newAccessToken);
+                memberService.Save(logginMember);
+        
+                logger.info("[logincontroller 登入成功]");
+        
+                Map<String, Object> resultMap = new HashMap<>();
+                resultMap.put("Message", "登入成功");
+                resultMap.put("Status", "Y");
+                resultMap.put("member", logginMember);
+                resultMap.put("accessToken", newAccessToken);
+                return ResponseEntity.ok(Collections.singletonList(resultMap));
+            } else {
+                // 如果没有匹配的成员
+                Map<String, Object> resultMap = new HashMap<>();
+                resultMap.put("Message", "登入失败，用户名或密码错误");
+                resultMap.put("Status", "N");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonList(resultMap));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

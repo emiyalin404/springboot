@@ -41,7 +41,7 @@ public class WebMvcConfig implements WebMvcConfigurer, Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         if (request.getMethod() != null && request.getMethod().equalsIgnoreCase("OPTIONS")) {
-            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8088,http://localhost:8080");  // 添加Swagger的地址
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Max-Age", "3600");
