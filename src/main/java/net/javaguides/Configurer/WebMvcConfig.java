@@ -25,7 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer, Filter {
     private LoginInterceptor loginInterceptor;
 
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer){
         WebMvcConfigurer.super.configureContentNegotiation(configurer);
     }
 
@@ -37,11 +37,11 @@ public class WebMvcConfig implements WebMvcConfigurer, Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException{
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         if (request.getMethod() != null && request.getMethod().equalsIgnoreCase("OPTIONS")) {
-            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8088,http://localhost:8080");  // 添加Swagger的地址
+            response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Max-Age", "3600");

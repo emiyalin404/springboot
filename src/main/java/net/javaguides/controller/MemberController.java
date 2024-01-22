@@ -84,7 +84,7 @@ public class MemberController {
 
     @PostMapping("/Login")
     @CrossOrigin("*")
-    @ApiOperation(value = "Login API", response = ResponseEntity.class)
+    @ApiOperation(value = "Login API", response = ResponseEntity.class)  //value 說明這是"Login API" response 的類型是泛型
     public ResponseEntity<List<Map<String, Object>>> Login(HttpServletRequest request, @RequestBody Member member) {
 
         String memberName = member.getMemberName();
