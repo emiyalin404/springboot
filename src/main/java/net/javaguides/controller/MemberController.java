@@ -62,7 +62,6 @@ public class MemberController {
     }
 
     @PostMapping("/updatemember")
-    @ApiOperation(value = "Login API", response = ResponseEntity.class)
     public List<Map<String, Object>> UpdateMember(@RequestBody Member member) {
         List<Map<String, Object>> resultList = new ArrayList<>();
         Map<String, Object> resultMap = new HashMap<>();
@@ -84,7 +83,7 @@ public class MemberController {
 
     @PostMapping("/Login")
     @CrossOrigin("*")
-    @ApiOperation(value = "Login API", response = ResponseEntity.class)  //value 說明這是"Login API" response 的類型是泛型
+//    @ApiOperation(value = "Login API", response = ResponseEntity.class)  //value 說明這是"Login API" response 的類型是泛型
     public ResponseEntity<List<Map<String, Object>>> Login(HttpServletRequest request, @RequestBody Member member) {
 
         String memberName = member.getMemberName();

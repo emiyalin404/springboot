@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@RequestMapping(path = "reports")
+//@RequestMapping(path = "reports")
+@RequestMapping("/VueTestApi/api/VueTest")
 public interface ReportApi {
     @GetMapping(value = "transactions/download")
     ResponseEntity<Void> downloadTransactionReport(@RequestParam(value = "exportType") ExportType exportType,
