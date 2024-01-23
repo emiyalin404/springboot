@@ -29,7 +29,7 @@ public class EmployeeController {
         return employeeService.createEmployee(employee);
     }
 
-    @RequestMapping("/deleteEmployee")
+    @GetMapping("/deleteEmployee")
     public Map<String, Object> deleteemployee(@RequestParam Long employeeId){
         Map<String, Object> resultMap = new HashMap<>();
         if (employeeId!=null) {
