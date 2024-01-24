@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
 public class WebMvcConfig {
     @Bean
     public WebMvcEndpointHandlerMapping webMvcEndpointHandlerMapping(
