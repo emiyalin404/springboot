@@ -24,6 +24,7 @@ public class MailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
             helper.setTo(receivers.toArray(new String[0]));
+            helper.setFrom("your-email@example.com");
             helper.setSubject(subject);
             helper.setText(content, true);
 
@@ -32,4 +33,6 @@ public class MailService {
             throw new RuntimeException(e);
         }
     }
+
+
 }

@@ -41,5 +41,10 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
     }
 
+    @Override
+    public List<Member> updatePasswordEmail(String memberName, String email) {
+        return memberRepository.UpdatePasswordEmail(memberName, email);
+    }
+
 
 }

@@ -13,4 +13,6 @@ public interface MemberService {
     List<Member> Login(String memberName, String password);
 
     void Save(Member member);
+
+    List<Member> updatePasswordEmail(String memberName, String email);
 }

@@ -19,7 +19,7 @@ import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 public class SwaggerConfig {
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("net.javaguides.controller"))
                 .paths(PathSelectors.any())
