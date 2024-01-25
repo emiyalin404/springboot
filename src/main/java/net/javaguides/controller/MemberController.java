@@ -3,6 +3,7 @@ package net.javaguides.controller;
 import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.ApiOperation;
 import net.javaguides.service.JwtService;
+import net.javaguides.service.MailService;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,16 +51,35 @@ public class MemberController {
     @Autowired
     private JwtService jwtService;
 
+    MailService mailService;
+
     private MemberService memberService;
 //    @Autowired
 //    KeywordServiceImpl keywordService;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MailService mailService) {
+        this.mailService=mailService;
         this.memberService = memberService;
+    }
+
+    @GetMapping("/searchMember")
+    public Boolean searchMember(@RequestParam("memberName") String memberName) {
+       List<Member>memberList = memberService.searchMember(memberName);
+       return memberList.isEmpty();
     }
 
     @PostMapping("/createmember")
     public Member createMember(@RequestBody Member member) {
+        
+        mailService.sendSimpleHtml(
+                List.of(member.getEmail()),
+                "【測試用客服】",
+                "<html><body><p>親愛的" + member.getMemberName() +
+                        "您好!</p></br>" +
+                        "<p>感謝您成為本站的會員，以後請多關照</p>" +
+                        " <a href=\"http://localhost:8088/#/\">立即登入</a>" +
+                        "<p><b>現在可以登入網站了</b></p></body></html>"
+        );
         return memberService.createMember(member);
     }
 

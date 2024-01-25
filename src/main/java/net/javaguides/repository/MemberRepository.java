@@ -25,6 +25,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findByMemberId(Long memberId);
 
+    @Query("SELECT m FROM Member m WHERE m.memberName = :member_name")
+    List<Member> searchMember(@Param("member_name")String memberName);
+
     @Query("SELECT m FROM Member m WHERE m.memberName = :member_name AND "+
             " m.email = :email")
     List<Member> UpdatePasswordEmail(@Param("member_name") String memberName, @Param("email") String email);

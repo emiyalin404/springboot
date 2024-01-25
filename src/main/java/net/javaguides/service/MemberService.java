@@ -14,5 +14,7 @@ public interface MemberService {
 
     void Save(Member member);
 
+    List<Member> searchMember(String memberName);
+
     List<Member> updatePasswordEmail(String memberName, String email);
 }

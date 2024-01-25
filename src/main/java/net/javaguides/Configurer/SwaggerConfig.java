@@ -5,14 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 
 @Configuration
 @EnableSwagger2
@@ -43,5 +41,6 @@ public class SwaggerConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
 
 }
